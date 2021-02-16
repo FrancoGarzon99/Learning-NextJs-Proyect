@@ -1,65 +1,46 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-
+import Head from 'next/head';
+import Button from '../components/Button/Button.jsx';
+import Github from '../components/Icons/GitHub.jsx';
+import Layout from '../components/Layout/Layout.jsx';
+import { colors } from '../styles/theme.js';
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      <Layout>
+        <section>
+          <img src="/devter-logo.png" />
+          <h1>Twitter devs</h1>
+          <h2>Aprendiendo Next Js</h2>
+          <Button>
+            <Github fill={'#fff'} width={24} height={24} />
+            Login with Github
+          </Button>
+        </section>
+        <style jsx>
+          {`
+            section {
+              display: grid;
+              height: 100%;
+              place-content: center;
+              place-items: center;
+            }
+            img {
+              width: 120px;
+            }
+            h1 {
+              color: ${colors.primary};
+              margin: 0;
+            }
+            h2 {
+              color: ${colors.secondary};
+            }
+          `}
+        </style>
+      </Layout>
     </div>
-  )
+  );
 }
