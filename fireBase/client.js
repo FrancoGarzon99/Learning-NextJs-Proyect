@@ -48,3 +48,30 @@ export const loginWithGoogle = () => {
     })
     .catch((error) => console.log(error, 'error Client Firebase Google'));
 };
+
+// User loguer
+const MapUserFromFirebaseAuth = (user) => {
+
+   const UserGoogle = {
+     userName : user.displayName,
+     avatar : user.photoURL,
+     email : user.email
+   }
+   const UserGithub = {
+    username: user.username,
+    avatar: user.avatar_url,
+    name: user.name,
+    location: user.location,
+
+   }
+    return UserGithub || UserGoogle
+}
+
+export const OnAuthStateChanged = (onchange) => {
+  return firebaseApp
+  .auth()
+  .onAuthStateChanged(user => {
+    const normalizeUser = MapUserFromFirebaseAuth(user)
+    onchange(normalizeUser)
+  })
+}
