@@ -4,15 +4,21 @@ import Button from '../components/Button/Button.jsx';
 import { GithubIcon, GoogleIcon } from '../components/Icons/Icons.jsx';
 import Layout from '../components/Layout/Layout.jsx';
 import { colors } from '../styles/theme.js';
-import { loginWithGithub, loginWithGoogle } from '../fireBase/client';
+import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from '../fireBase/client';
 export default function Home() {
-  const [userAuth, setUserAuth] = useState(null);
-
+  useEffect(() => {
+    OnAuthStateChanged(setUserAuth);
+  }, []);
+  // User data auth
+  const [userAuth, setUserAuth] = useState(undefined);
+  console.log(userAuth, 'Userloggued');
+  //Button Github
   const handleClickGithub = () => {
     loginWithGithub()
       .then((res) => setUserAuth(res))
       .catch((error) => console.log(error, 'error'));
   };
+  // Button Google
   const handleClickGoogle = () => {
     loginWithGoogle()
       .then((res) => setUserAuth(res))
@@ -29,7 +35,7 @@ export default function Home() {
           <img src="/devter-logo.png" />
           <h1>Twitter devs</h1>
           <h2>Aprendiendo Next Js</h2>
-          {userAuth === null ? (
+          {userAuth === null && (
             <>
               <div className="buttonGithub">
                 <Button onClick={handleClickGithub}>
@@ -44,10 +50,14 @@ export default function Home() {
                 </Button>
               </div>
             </>
-          ) : (
-            <>
-              <div>Te haz logueado con exito!</div>
-            </>
+          )}
+          {userAuth && userAuth.avatar && (
+            <div>
+              <img src={userAuth.avatar} alt="avatar" />
+              <h5>{userAuth.username}</h5>
+              <p>{userAuth.name}</p>
+              {userAuth.email && <p>{userAuth.email}</p>}
+            </div>
           )}
         </section>
 

@@ -19,59 +19,33 @@ export const loginWithGithub = () => {
   return firebaseApp
     .auth()
     .signInWithPopup(gitHubProvider)
-    .then((user) => {
-      const { username, profile } = user.additionalUserInfo;
-      const userDataAuth = {
-        username: username,
-        avatar: profile.avatar_url,
-        name: profile.name,
-        location: profile.location,
-      };
-      return userDataAuth;
-    })
+    .then(MapUserFromFirebaseAuth)
     .catch((error) => console.log(error, 'error Client Firebase Github'));
 };
 // Google Auth
 export const loginWithGoogle = () => {
-  const googleProvider = new firebaseApp.auth.TwitterAuthProvider();
+  const googleProvider = new firebaseApp.auth.GoogleAuthProvider();
   return firebaseApp
     .auth()
     .signInWithPopup(googleProvider)
-    .then((response) => {
-      const { user } = response;
-      const userDataAuth = {
-        username: user.displayName,
-        avatar: user.photoURL,
-        email: user.email,
-      };
-      return userDataAuth;
-    })
+    .then(MapUserFromFirebaseAuth)
     .catch((error) => console.log(error, 'error Client Firebase Google'));
 };
 
 // User loguer
 const MapUserFromFirebaseAuth = (user) => {
+  const { displayName, photoURL, email } = user;
+  return {
+    username: displayName,
+    avatar: photoURL,
+    email: email,
+  };
+};
 
-   const UserGoogle = {
-     userName : user.displayName,
-     avatar : user.photoURL,
-     email : user.email
-   }
-   const UserGithub = {
-    username: user.username,
-    avatar: user.avatar_url,
-    name: user.name,
-    location: user.location,
-
-   }
-    return UserGithub || UserGoogle
-}
-
+//Function auth/notAuth
 export const OnAuthStateChanged = (onchange) => {
-  return firebaseApp
-  .auth()
-  .onAuthStateChanged(user => {
-    const normalizeUser = MapUserFromFirebaseAuth(user)
-    onchange(normalizeUser)
-  })
-}
+  return firebaseApp.auth().onAuthStateChanged((user) => {
+    const normalizeUser = MapUserFromFirebaseAuth(user);
+    onchange(normalizeUser);
+  });
+};
