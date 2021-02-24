@@ -1,4 +1,4 @@
-import styles, { globalStyles } from './Style';
+import styles, { globalStyles } from "./Style";
 export default function Layout({ children }) {
   return (
     <>
