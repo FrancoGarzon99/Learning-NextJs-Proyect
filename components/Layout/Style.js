@@ -1,5 +1,5 @@
-import { breakPoins, fonts } from '../../styles/theme';
-import css from 'styled-jsx/css';
+import { breakPoins, fonts } from '../../styles/theme'
+import css from 'styled-jsx/css'
 
 export default css`
   div {
@@ -20,7 +20,7 @@ export default css`
       width: ${breakPoins.mobile};
     }
   } ;
-`;
+`
 export const globalStyles = css.global`
   shtml,
   body {
@@ -30,4 +30,4 @@ export const globalStyles = css.global`
     padding: 0;
     font-family: ${fonts.base};
   }
-`;
+`
