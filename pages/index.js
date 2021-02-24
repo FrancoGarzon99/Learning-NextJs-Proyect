@@ -1,29 +1,29 @@
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Button from '../components/Button/Button.jsx';
-import { GithubIcon, GoogleIcon } from '../components/Icons/Icons.jsx';
-import Layout from '../components/Layout/Layout.jsx';
-import { colors } from '../styles/theme.js';
-import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from '../fireBase/client';
-export default function Home() {
+import { useState, useEffect } from 'react'
+import Head from 'next/head'
+import Button from '../components/Button/Button.jsx'
+import { GithubIcon, GoogleIcon } from '../components/Icons/Icons.jsx'
+import Layout from '../components/Layout/Layout.jsx'
+import { colors } from '../styles/theme.js'
+import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from '../fireBase/client'
+export default function Home () {
   useEffect(() => {
-    OnAuthStateChanged(setUserAuth);
-  }, []);
+    OnAuthStateChanged(setUserAuth)
+  }, [])
   // User data auth
-  const [userAuth, setUserAuth] = useState(undefined);
-  console.log(userAuth, 'Userloggued');
-  //Button Github
+  const [userAuth, setUserAuth] = useState(undefined)
+  console.log(userAuth, 'Userloggued')
+  // Button Github
   const handleClickGithub = () => {
     loginWithGithub()
       .then((res) => setUserAuth(res))
-      .catch((error) => console.log(error, 'error'));
-  };
+      .catch((error) => console.log(error, 'error'))
+  }
   // Button Google
   const handleClickGoogle = () => {
     loginWithGoogle()
       .then((res) => setUserAuth(res))
-      .catch((error) => console.log(error, 'error'));
-  };
+      .catch((error) => console.log(error, 'error'))
+  }
   return (
     <div>
       <Head>
@@ -89,5 +89,5 @@ export default function Home() {
         </style>
       </Layout>
     </div>
-  );
+  )
 }
