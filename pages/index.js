@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Button from '../components/Button/Button.jsx';
-import { GithubIcon, GoogleIcon } from '../components/Icons/Icons.jsx';
-import Layout from '../components/Layout/Layout.jsx';
-import { colors } from '../styles/theme.js';
-import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from '../fireBase/client';
+import Button from 'components/Button/Button.js';
+import { GithubIcon, GoogleIcon } from 'components/Icons/Icons.js';
+import Layout from 'components/Layout/Layout.js';
+import { colors } from 'styles/theme.js';
+import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from 'fireBase/client';
 export default function Home() {
   useEffect(() => {
     OnAuthStateChanged(setUserAuth);
@@ -52,11 +52,8 @@ export default function Home() {
             </>
           )}
           {userAuth && userAuth.avatar && (
-            <div>
-              <img src={userAuth.avatar} alt="avatar" />
-              <h5>{userAuth.username}</h5>
-              <p>{userAuth.name}</p>
-              {userAuth.email && <p>{userAuth.email}</p>}
+            <div className="avatarContainer">
+              <img src={userAuth.avatar} />
             </div>
           )}
         </section>
@@ -84,6 +81,9 @@ export default function Home() {
             }
             .buttonGithub {
               margin: 5px;
+            }
+            .avatarContainer {
+              display: flex;
             }
           `}
         </style>
