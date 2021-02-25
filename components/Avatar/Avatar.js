@@ -1,8 +1,9 @@
-const Avatar = (text, size, src, alt) => {
+import styles from 'components/Avatar/avatar.module.css';
+const Avatar = ({ text, src, alt, size }) => {
   return (
     <>
-      <div className="container">
-        <img src={src} alt={alt} style={{ width: `${size}` }} className="avatar" />
+      <div className={styles.container}>
+        <img src={src} alt={alt} className={styles.avatar} style={{ width: `${size}` }} />
         <strong>{text}</strong>
       </div>
     </>
