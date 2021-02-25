@@ -5,13 +5,13 @@ import { GithubIcon, GoogleIcon } from 'components/Icons/Icons.js';
 import Layout from 'components/Layout/Layout.js';
 import { colors } from 'styles/theme.js';
 import { loginWithGithub, loginWithGoogle, OnAuthStateChanged } from 'fireBase/client';
+import Avatar from 'components/Avatar/Avatar';
 export default function Home() {
   useEffect(() => {
     OnAuthStateChanged(setUserAuth);
   }, []);
   // User data auth
   const [userAuth, setUserAuth] = useState(undefined);
-  console.log(userAuth, 'Userloggued');
   // Button Github
   const handleClickGithub = () => {
     loginWithGithub()
@@ -53,7 +53,7 @@ export default function Home() {
           )}
           {userAuth && userAuth.avatar && (
             <div className="avatarContainer">
-              <img src={userAuth.avatar} />
+              <Avatar size={'49px'} src={userAuth.avatar} alt={'avatar'} text={userAuth.username} />
             </div>
           )}
         </section>
