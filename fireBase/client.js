@@ -1,14 +1,14 @@
-import firebaseApp from "firebase/app";
-import "firebase/auth";
+import firebaseApp from 'firebase/app';
+import 'firebase/auth';
 
 const Config = {
-  apiKey: "AIzaSyDBwtwMFqG6JMIS3Y_MC5_yUieUChLuEgU",
-  authDomain: "twittertodevsproyectlearning.firebaseapp.com",
-  projectId: "twittertodevsproyectlearning",
-  storageBucket: "twittertodevsproyectlearning.appspot.com",
-  messagingSenderId: "1019929575021",
-  appId: "1:1019929575021:web:c20913fe6039a23d9d0964",
-  measurementId: "G-78RPX76E33",
+  apiKey: 'AIzaSyDBwtwMFqG6JMIS3Y_MC5_yUieUChLuEgU',
+  authDomain: 'twittertodevsproyectlearning.firebaseapp.com',
+  projectId: 'twittertodevsproyectlearning',
+  storageBucket: 'twittertodevsproyectlearning.appspot.com',
+  messagingSenderId: '1019929575021',
+  appId: '1:1019929575021:web:c20913fe6039a23d9d0964',
+  measurementId: 'G-78RPX76E33',
 };
 // Initial app Firebase
 !firebaseApp.apps.length && firebaseApp.initializeApp(Config);
@@ -19,7 +19,7 @@ export const loginWithGithub = () => {
   return firebaseApp
     .auth()
     .signInWithPopup(gitHubProvider)
-    .catch((error) => console.log(error, "error Client Firebase Github"));
+    .catch((error) => console.log(error, 'error Client Firebase Github'));
 };
 // Google Auth
 export const loginWithGoogle = () => {
@@ -27,7 +27,7 @@ export const loginWithGoogle = () => {
   return firebaseApp
     .auth()
     .signInWithPopup(googleProvider)
-    .catch((error) => console.log(error, "error Client Firebase Google"));
+    .catch((error) => console.log(error, 'error Client Firebase Google'));
 };
 
 // User loguer
@@ -43,7 +43,7 @@ const MapUserFromFirebaseAuth = (user) => {
 // Function auth/notAuth
 export const OnAuthStateChanged = (onchange) => {
   return firebaseApp.auth().onAuthStateChanged((user) => {
-    const normalizeUser = MapUserFromFirebaseAuth(user);
+    const normalizeUser = user ? MapUserFromFirebaseAuth(user) : null;
     onchange(normalizeUser);
   });
 };
